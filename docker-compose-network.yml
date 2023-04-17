@@ -1,0 +1,18 @@
+services:
+  container_name:
+    image: nginx
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      test_network:
+        ipv4_address: 192.168.0.150
+networks:
+  test_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"
+
+# https://docs.docker.com/compose/compose-file/05-services/#ipv4_address-ipv6_address
+# https://docs.docker.com/compose/networking/
