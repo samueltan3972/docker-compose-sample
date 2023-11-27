@@ -1,0 +1,31 @@
+version: '3'
+volumes:
+  db: 
+  portainer:
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: password #pA33w0Rd1@3$
+      POSTGRES_USER: admin
+      
+  adminer:
+    image: 'adminer:latest'
+    restart: always
+    ports:
+      - '80:8080'
+  
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9000:9000
+    volumes:
+        - portainer:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
